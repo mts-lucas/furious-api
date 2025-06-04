@@ -15,7 +15,12 @@ pydantic-settings = "^2.9.1"
 psycopg2-binary = "^2.9.10"
 asyncpg = "^0.30.0"
 
+[tool.poetry.scripts]
+furious = "furious_api.main:main"
+
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
