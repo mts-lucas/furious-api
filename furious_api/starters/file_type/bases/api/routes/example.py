@@ -6,7 +6,7 @@ from app.schemas.example import ItemExampleSchema
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-router = APIRouter(prefix="items", tags=["items"])
+router = APIRouter(prefix="/items", tags=["items"])
 
 @router.post("/", response_model=ItemExampleSchema)
 def create_item(item: ItemExampleSchema, db: Session = Depends(get_db)):

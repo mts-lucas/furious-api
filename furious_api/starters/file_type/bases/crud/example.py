@@ -1,10 +1,12 @@
-from sqlalchemy.orm import Session
 from app.models.example import ItemExample
 from app.schemas.example import ItemExampleSchema
+from sqlalchemy.orm import Session
+
 
 class CRUDItem:
     def get_item(self, db: Session, item_id: int) -> ItemExample | None:
         return db.query(ItemExample).filter(ItemExample.id == item_id).first()
+
 
     def get_items(self, db: Session, skip: int = 0, limit: int = 100) -> list[ItemExample]:
         return db.query(ItemExample).offset(skip).limit(limit).all()

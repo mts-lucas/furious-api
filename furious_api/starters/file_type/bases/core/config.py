@@ -1,12 +1,11 @@
-from typing import Literal, Optional
+from typing import ClassVar, List, Literal, Optional, Union
 
-from pydantic import Field, PostgresDsn, field_validator
+from pydantic import Field, HttpUrl, PostgresDsn, field_validator
 from pydantic_settings import BaseSettings
 
 
+
 class Settings(BaseSettings):
-    # Modo de Operação
-    DB_MODE: Literal["sync", "async"] = Field(default="sync")
     
     # Configuração do banco de dados
     DB_ENGINE: Literal["sqlite", "postgresql"] = Field(default="sqlite")
@@ -23,11 +22,11 @@ class Settings(BaseSettings):
     SECRET_KEY: str = Field(default="your-secret-key")
     ALGORITHM: str = Field(default="HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=30)
-    ALLOW_ORIGINS=Field(default=["*"])
-    ALLOW_CREDENTIALS=Field(default=True)
-    ALLOW_METHODS=Field(default=["*"])
-    ALLOW_HEADERS=Field(default=["*"])
-    CORS_CONFIG= {
+    ALLOW_ORIGINS: List[Union[HttpUrl, str]] =Field(default=["*"])
+    ALLOW_CREDENTIALS: bool =Field(default=True)
+    ALLOW_METHODS: List[str] =Field(default=["*"])
+    ALLOW_HEADERS: List[str] =Field(default=["*"])
+    CORS_CONFIG: ClassVar[dict] = {
         "allow_origins": ALLOW_ORIGINS,
         "allow_credentials": ALLOW_CREDENTIALS,
         "allow_methods": ALLOW_METHODS,
@@ -39,30 +38,33 @@ class Settings(BaseSettings):
     PROJECT_VERSION: str = Field(default="1.0.0")
     DEBUG: bool = Field(default=False)
 
+
     class Config:
         env_file = ".env"
         case_sensitive = True
 
+
     @field_validator("DATABASE_URL", mode="before")
     @classmethod
-    def assemble_db_connection(cls, v: Optional[str], values: dict) -> str:
+    def assemble_db_connection(cls, v: Optional[str], info) -> str:
         if v:
             return v
-        
-        engine = values.get("DB_ENGINE")
-        mode = values.get("DB_MODE")
-        
+
+        data = info.data  # <- aqui você acessa os outros campos
+        engine = data.get("DB_ENGINE")
+
         if engine == "postgresql":
-            scheme = "postgresql+asyncpg" if mode == "async" else "postgresql"
             return PostgresDsn.build(
-                scheme=scheme,
-                username=values.get("DB_USER"),
-                password=values.get("DB_PASSWORD"),
-                host=values.get("DB_HOST"),
-                port=values.get("DB_PORT", "5432"),
-                path=values.get("DB_NAME") or "",
+                scheme=engine,
+                username=data.get("DB_USER"),
+                password=data.get("DB_PASSWORD"),
+                host=data.get("DB_HOST"),
+                port=data.get("DB_PORT", "5432"),
+                path=data.get("DB_NAME") or "",
             )
+
         
-        return "sqlite:///./database.db"
+        return "sqlite:///database.db" 
+
 
 settings = Settings()
