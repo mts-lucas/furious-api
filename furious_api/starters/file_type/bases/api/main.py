@@ -1,3 +1,5 @@
+# importe suas rota da api aqui
+
 from fastapi import APIRouter
 
 from .routes import example

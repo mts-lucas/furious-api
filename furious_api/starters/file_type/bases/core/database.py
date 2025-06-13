@@ -6,6 +6,7 @@ from sqlalchemy.orm import as_declarative, sessionmaker
 
 from .config import settings
 
+# engine
 if settings.DB_ENGINE == "sqlite":
     engine = create_engine(
         settings.DATABASE_URL, connect_args={"check_same_thread": False}
@@ -18,7 +19,7 @@ else:
         pool_pre_ping=True
     )
 
-
+# sessao como banco de dados
 SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,

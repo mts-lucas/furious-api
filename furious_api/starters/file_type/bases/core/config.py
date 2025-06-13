@@ -50,7 +50,7 @@ class Settings(BaseSettings):
         if v:
             return v
 
-        data = info.data  # <- aqui você acessa os outros campos
+        data = info.data
         engine = data.get("DB_ENGINE")
 
         if engine == "postgresql":
