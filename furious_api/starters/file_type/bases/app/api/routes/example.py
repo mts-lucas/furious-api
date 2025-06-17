@@ -1,8 +1,8 @@
 from typing import List
 
-from app.core.database import get_db
-from app.crud.example import crud_item
-from app.schemas.example import ItemExampleSchema
+from django_melhor.core.database import get_db
+from django_melhor.crud.example import crud_item
+from django_melhor.schemas.example import ItemExampleSchema
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 

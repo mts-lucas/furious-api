@@ -52,6 +52,7 @@ DB_ENGINE=sqlite
 ### Rodar o servidor de desenvolvimento:
 
 ```bash
+cd meu_projeto
 python main.py
 ```
 
@@ -91,19 +92,19 @@ alembic upgrade head
 ## Estrutura do Projeto
 
 ```
-meuprojeto/
-├── core/               # Configurações centrais
-│   ├── config.py       # Configurações da aplicação
-│   └── database.py     # Configuração do banco de dados
-├── models/             # Modelos do SQLAlchemy
-├── schemas/            # Schemas do Pydantic
-├── crud/               # Operações de banco de dados
-├── api/                # Rotas da API
-├── alembic/            # Migrações do banco de dados
-├── main.py             # Ponto de entrada da aplicação
-├── requirements.txt    # Dependências do projeto
-└── .env                # Variáveis de ambiente
-└── .env.exemple        # Modelo de Variáveis de ambiente
+seu_diretorio/
+├── meu_projeto/
+|  ├── core/          # Configurações centrais
+|  ├── models/        # Modelos de banco de dados
+|  ├── schemas/       # Schemas Pydantic
+|  ├── api/           # Rotas da API
+|  ├── crud/          # Operações de banco
+|  └── main.py        # Ponto de entrada
+├── alembic/           # Migrações de banco
+├── alembic.ini
+├── requirements.txt   # Dependências do projeto
+├── .env.exemple       # Variáveis de ambiente
+└── README.md          # Documentação do projeto
 ```
 
 ## Contribuição

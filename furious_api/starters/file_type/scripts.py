@@ -4,26 +4,35 @@ from pathlib import Path
 
 def start_file_type_project(base_dir: str) -> None:
     """
-    Cria uma estrutura base de projeto FastAPI.
+    Copia o conteúdo de 'bases' para o diretório atual, renomeando a pasta 'app' para o nome informado,
+    e atualizando os imports nos arquivos Python.
 
     Args:
-        base_dir (str): Nome do diretório base do projeto (e prefixo para os imports).
-        base_template_dir (str): Diretório contendo os arquivos base (padrão: 'bases').
+        base_dir (str): Nome para renomear a pasta 'app' e atualizar os imports.
     """
     source = Path("furious_api/starters/file_type/bases")
-    destination = Path(base_dir)
+    destination = Path.cwd()
 
+    for item in source.iterdir():
+        if item.name == "app" and item.is_dir():
+            # Renomeia a pasta 'app' para o nome fornecido
+            shutil.copytree(item, destination / base_dir, dirs_exist_ok=True)
+        else:
+            # Copia arquivos e outras pastas normalmente
+            target = destination / item.name
+            if item.is_dir():
+                shutil.copytree(item, target, dirs_exist_ok=True)
+            else:
+                shutil.copy2(item, target)
 
-    # Copia a estrutura de diretórios e arquivos
-    shutil.copytree(source, destination, dirs_exist_ok=True)
-
-    # Substitui os imports dentro dos arquivos copiados
+    # Substitui os imports nos arquivos .py
     for file_path in destination.rglob("*.py"):
         with file_path.open("r", encoding="utf-8") as file:
             content = file.read()
 
-        # Substituir 'app.' pelo nome do projeto (base_dir)
-        updated_content = content.replace("from app", f"from {base_dir}")
+        # Atualiza importações de 'from django_melhor' e 'import django_melhor'
+        updated_content = content.replace("from django_melhor", f"from {base_dir}")
+        updated_content = updated_content.replace("import django_melhor", f"import {base_dir}")
 
         with file_path.open("w", encoding="utf-8") as file:
             file.write(updated_content)

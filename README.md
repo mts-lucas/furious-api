@@ -36,13 +36,14 @@ Isso criará uma nova pasta `meu_projeto` com toda a estrutura FastAPI pré-conf
 O comando `furious startapp` cria a seguinte estrutura:
 
 ```
-meu_projeto/
-├── core/          # Configurações centrais
-├── models/        # Modelos de banco de dados
-├── schemas/       # Schemas Pydantic
-├── api/           # Rotas da API
-├── crud/          # Operações de banco
-├── main.py        # Ponto de entrada
+seu_diretorio/
+├── meu_projeto/
+|  ├── core/          # Configurações centrais
+|  ├── models/        # Modelos de banco de dados
+|  ├── schemas/       # Schemas Pydantic
+|  ├── api/           # Rotas da API
+|  ├── crud/          # Operações de banco
+|  └── main.py        # Ponto de entrada
 ├── alembic/           # Migrações de banco
 ├── alembic.ini
 ├── requirements.txt   # Dependências do projeto

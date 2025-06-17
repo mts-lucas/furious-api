@@ -1,1 +1,1 @@
-from app.models.example import ItemExample
+from django_melhor.models.example import ItemExample

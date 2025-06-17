@@ -1,6 +1,6 @@
 
 # apague esse arquivo ou renomeie, lembrando de apagar o import do models.main
-from app.core.database import Base
+from django_melhor.core.database import Base
 from sqlalchemy import Column, Float, Integer, String
 
 
