@@ -4,6 +4,9 @@ version = "0.1.0"
 description = ""
 authors = ["mts-lucas <lmateus1067@outlook.com>"]
 readme = "README.md"
+include = [
+    "furious_api/starters/file_type/bases/**"
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -19,9 +22,6 @@ alembic = "^1.16.1"
 [tool.poetry.scripts]
 furious = "furious_api.main:main"
 
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-

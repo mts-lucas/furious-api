@@ -1,5 +1,6 @@
 import shutil
 from pathlib import Path
+from importlib.resources import files as pkg_files
 
 
 def start_file_type_project(base_dir: str) -> None:
@@ -10,7 +11,8 @@ def start_file_type_project(base_dir: str) -> None:
     Args:
         base_dir (str): Nome para renomear a pasta 'app' e atualizar os imports.
     """
-    source = Path("furious_api/starters/file_type/bases")
+    # source = Path("furious_api/starters/file_type/bases")
+    source = pkg_files("furious_api.starters.file_type").joinpath("bases")
     destination = Path.cwd()
 
     for item in source.iterdir():
