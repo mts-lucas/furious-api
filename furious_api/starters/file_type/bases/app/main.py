@@ -1,6 +1,6 @@
 import uvicorn
-from django_melhor.api.main import api_router
-from django_melhor.core.config import settings
+from app.api.main import api_router
+from app.core.config import settings
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse

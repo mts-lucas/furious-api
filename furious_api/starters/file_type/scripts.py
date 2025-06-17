@@ -1,6 +1,6 @@
 import shutil
-from pathlib import Path
 from importlib.resources import files as pkg_files
+from pathlib import Path
 
 
 def start_file_type_project(base_dir: str) -> None:
@@ -32,8 +32,8 @@ def start_file_type_project(base_dir: str) -> None:
         with file_path.open("r", encoding="utf-8") as file:
             content = file.read()
 
-        # Atualiza importações de 'from django_melhor' e 'import django_melhor'
-        updated_content = content.replace("from django_melhor", f"from {base_dir}")
+        # Atualiza importações de 'from app' e 'import django_melhor'
+        updated_content = content.replace("from app", f"from {base_dir}")
         updated_content = updated_content.replace("import django_melhor", f"import {base_dir}")
 
         with file_path.open("w", encoding="utf-8") as file:

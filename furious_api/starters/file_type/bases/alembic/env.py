@@ -1,10 +1,9 @@
 from logging.config import fileConfig
 
 from alembic import context
+from app.core.config import settings
+from app.core.database import Base
 from sqlalchemy import engine_from_config, pool
-
-from django_melhor.core.config import settings
-from django_melhor.core.database import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -22,7 +21,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 # Importando todos os seus models aqui:
-from django_melhor.models.main import *  # NOQA
+from app.models.main import *  # NOQA
 
 target_metadata = Base.metadata
 

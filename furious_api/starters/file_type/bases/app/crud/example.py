@@ -1,5 +1,5 @@
-from django_melhor.models.example import ItemExample
-from django_melhor.schemas.example import ItemExampleSchema
+from app.models.example import ItemExample
+from app.schemas.example import ItemExampleSchema
 from sqlalchemy.orm import Session
 
 
