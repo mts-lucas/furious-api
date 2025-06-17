@@ -21,7 +21,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 # Importando todos os seus models aqui:
-from app.models.main import *  # NOQA
+from app.models import *  # NOQA
 
 target_metadata = Base.metadata
 
