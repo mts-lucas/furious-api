@@ -1,6 +1,6 @@
 import uvicorn
-from app.api import api_router
-from app.core.config import settings
+from api import api_router
+from core.config import settings
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse

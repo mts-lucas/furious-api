@@ -1,5 +1,5 @@
-from app.models.example import ItemExample
-from app.schemas.example import ItemExampleSchema
+from models.example import ItemExample
+from schemas.example import ItemExampleSchema
 from sqlalchemy.orm import Session
 
 

@@ -1,1 +1,1 @@
-from app.models.example import ItemExample
+from .example import ItemExample

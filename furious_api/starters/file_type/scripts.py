@@ -32,9 +32,12 @@ def start_file_type_project(base_dir: str) -> None:
         with file_path.open("r", encoding="utf-8") as file:
             content = file.read()
 
-        # Atualiza importações de 'from app' e 'import django_melhor'
-        updated_content = content.replace("from app", f"from {base_dir}")
-        updated_content = updated_content.replace("import django_melhor", f"import {base_dir}")
+        # Atualiza importações de 'from app'
+        if "alembic" in file_path.parts:
+            updated_content = content.replace("from app", f"from {base_dir}")
+        else:
+            updated_content = content.replace("from app", f"from {destination.name}.{base_dir}")
+        
 
         with file_path.open("w", encoding="utf-8") as file:
             file.write(updated_content)
